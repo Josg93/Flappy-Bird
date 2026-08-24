@@ -20,6 +20,10 @@ input_handler.InputHandler.set_keyboard_action(input_handler.KEY_ESCAPE, "quit")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RETURN, "confirm")
 input_handler.InputHandler.set_keyboard_action(input_handler.KEY_SPACE, "pause")
 input_handler.InputHandler.set_mouse_click_action(input_handler.MOUSE_BUTTON_1, "jump")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_UP, "selection_up")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_DOWN, "selection_down")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_LEFT, "move_left")
+input_handler.InputHandler.set_keyboard_action(input_handler.KEY_RIGHT, "move_right")
 
 
 TITLE = "Flappy Bird"
@@ -38,6 +42,7 @@ BIRD_HEIGHT = 28
 LOG_WIDTH = 70
 LOG_HEIGHT = 288
 LOGS_GAP = 90
+LOGS_MIN_GAP = 60
 
 GROUND_HEIGHT = 16
 
@@ -49,7 +54,10 @@ BACK_SCROLL_SPEED = 50  # MAIN_SCROLL_SPEED / 2
 GRAVITY = 980
 JUMP_TAKEOFF_SPEED = GRAVITY / 6
 
-TIME_TO_SPAWN_LOGS = 1.5
+TIME_TO_SPAWN_LOGS = 1.5  # Dificultad normal
+
+POWERUP_DURATION = 5.0
+POWERUP_SIZE = 40
 
 MEDIUM_TEXT_SIZE = 18
 HUGE_TEXT_SIZE = 56
@@ -62,6 +70,8 @@ TEXTURES = {
     "background": pygame.image.load(BASE_DIR / "assets" / "graphics" / "background.png"),
     "ground": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ground.png"),
     "log": pygame.image.load(BASE_DIR / "assets" / "graphics" / "log.png"),
+    "powerup": pygame.image.load(BASE_DIR / "assets" / "graphics" / "powerup.png"),
+    "ghost": pygame.image.load(BASE_DIR / "assets" / "graphics" / "ghost.png"),
 }
 # The top log of every pair is the same image, flipped upside down.
 TEXTURES["log_inverted"] = pygame.transform.flip(TEXTURES["log"], False, True)
@@ -79,10 +89,9 @@ pygame.mixer.music.load(BASE_DIR / "assets" / "sounds" / "marios_way.ogg")
 FONTS = {
     "medium": pygame.font.Font(BASE_DIR / "assets" / "fonts" / "font.ttf", MEDIUM_TEXT_SIZE),
     "huge": pygame.font.Font(BASE_DIR / "assets" / "fonts" / "font.ttf", HUGE_TEXT_SIZE),
-    "flappy": pygame.font.Font(
-        BASE_DIR / "assets" / "fonts" / "flappy.ttf", FLAPPY_TEXT_SIZE
-    ),
+    "flappy": pygame.font.Font(BASE_DIR / "assets" / "fonts" / "flappy.ttf", FLAPPY_TEXT_SIZE),
 }
 
 COLOR_BACKGROUND = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
+COLOR_YELLOW = (255, 200, 0)

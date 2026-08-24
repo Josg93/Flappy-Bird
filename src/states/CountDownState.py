@@ -10,16 +10,19 @@ This file contains the definition of the class CountDownState.
 
 import pygame
 
+from typing import Optional
+
 from gale.state import BaseState
 from gale.text import render_text
 
 import settings
+from src.Difficulty import Difficulty
 from src.World import World
 
 
 class CountDownState(BaseState):
-    def enter(self) -> None:
-        self.world = World(generate_logs=False)
+    def enter(self, difficulty: Optional[Difficulty] = None) -> None:
+        self.world = World(generate_logs=False, difficulty=difficulty)
         self.counter = 3
         self.timer = 0.0
 
