@@ -70,10 +70,7 @@ class Bird:
             self.jumping = False
 
         self.y += self.vy * dt
-        self.x = max(
-            0.0,
-            min(self.x + self.vx * dt, settings.VIRTUAL_WIDTH - self.width),
-        )
+        self.x = max(0.0,min(self.x + self.vx * dt, settings.VIRTUAL_WIDTH - self.width),)
 
         if self.ghost_timer > 0:
             self.ghost_timer = max(0.0, self.ghost_timer - dt)

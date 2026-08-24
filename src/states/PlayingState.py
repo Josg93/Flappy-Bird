@@ -48,9 +48,8 @@ class PlayingState(BaseState):
         self.bird.update(dt)
         self.world.update(dt)
 
-        if self.world.collides(
-            self.bird.get_rect(), ignore_logs=self.bird.is_ghost()
-        ):
+        #si estan activos los powerups se envia ignore_logs=True a word.collides  
+        if self.world.collides(self.bird.get_rect(), ignore_logs=self.bird.is_ghost()):
             settings.SOUNDS["explosion"].play()
             settings.SOUNDS["hurt"].play()
             self.state_machine.change("count_down", difficulty=self.world.difficulty)
