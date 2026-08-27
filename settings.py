@@ -57,7 +57,7 @@ JUMP_TAKEOFF_SPEED = GRAVITY / 6
 TIME_TO_SPAWN_LOGS = 1.5  # Dificultad normal
 
 POWERUP_DURATION = 5.0
-POWERUP_SIZE = 40
+POWERUP_SIZE = 20
 
 MEDIUM_TEXT_SIZE = 18
 HUGE_TEXT_SIZE = 56
@@ -82,6 +82,8 @@ SOUNDS = {
     "hurt": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "hurt.wav"),
     "score": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "score.wav"),
     "pause": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "pause.wav"),
+    "clock": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "clock.wav"),
+    "powerup": pygame.mixer.Sound(BASE_DIR / "assets" / "sounds" / "get_powerup.mp3")
 }
 
 pygame.mixer.music.load(BASE_DIR / "assets" / "sounds" / "marios_way.ogg")

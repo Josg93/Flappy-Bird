@@ -76,7 +76,7 @@ class World:
         gap_low, gap_high = self.difficulty.gap_range()
         gap = random.randint(gap_low, gap_high)
 
-        #configurar altura del tronco    
+        #configurar altura a la que se genera el tronco  
         y_low, y_high = self.difficulty.y_variation_range()
         y = max(
             -settings.LOG_HEIGHT + 10,
@@ -88,14 +88,14 @@ class World:
         self.last_log_y = y
 
 
-        #------
+        #troncos que se mueven
         move_amplitude = 0.0
         move_speed = 0.0
         if random.random() < self.difficulty.moving_ratio():
             move_amplitude = LogPair.MOVE_AMPLITUDE
             move_speed = random.uniform(1.5, 2.5)
 
-        #añadir tronquito y crear con factory
+        # crear con factory y añadir tronquito 
         self.logs.append(
             self.log_pair_factory.create(
                 settings.VIRTUAL_WIDTH,

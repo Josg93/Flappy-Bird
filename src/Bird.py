@@ -73,7 +73,10 @@ class Bird:
         self.x = max(0.0,min(self.x + self.vx * dt, settings.VIRTUAL_WIDTH - self.width),)
 
         if self.ghost_timer > 0:
+            #la funcion max acota el tiempo entre 0 y el tiempo - dt
             self.ghost_timer = max(0.0, self.ghost_timer - dt)
+        
+         
 
     def render(self, surface: pygame.Surface) -> None:
         texture = settings.TEXTURES["bird"]

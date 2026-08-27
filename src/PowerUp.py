@@ -10,14 +10,11 @@ class PowerUp:
         self.x: float = x
         self.y: float = y
         self.time: float = 0.0
-
-    def bob(self) -> float:
-        return math.sin(self.time * 3) * 4
-
+ 
     def get_rect(self) -> pygame.Rect:
         return pygame.Rect(
             round(self.x),
-            round(self.y + self.bob()),
+            round(self.y),
             settings.POWERUP_SIZE,
             settings.POWERUP_SIZE,
         )

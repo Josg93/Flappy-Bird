@@ -93,7 +93,7 @@ class Hard(Difficulty):
     Y_VARIATION_RANGE = (-60, 60)
     MOVING_RATIO = 0.25
     HORIZONTAL_SPEED = 120.0
-    POWERUP_RATIO = 0.2
+    POWERUP_RATIO = 0.35
 
     def scroll_speed(self) -> float:
         return settings.MAIN_SCROLL_SPEED

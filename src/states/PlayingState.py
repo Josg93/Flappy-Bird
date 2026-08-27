@@ -44,27 +44,52 @@ class PlayingState(BaseState):
         )
         self.score = score if score is not None else 0
 
+        self.current_music = "powerup_music" if self.bird.is_ghost() else "marios_way"
+        if self.current_music == "powerup_music":
+            self.change_music("powerup_music.wav")
+        
+
     def update(self, dt: float) -> None:
         self.bird.update(dt)
         self.world.update(dt)
+
+        # si el powerup dejo de estar activo, volvemos a la musica original
+        if not self.bird.is_ghost() and self.current_music == "powerup_music":
+            self.change_music("marios_way.ogg")
+            self.current_music = "marios_way"
 
         #si estan activos los powerups se envia ignore_logs=True a word.collides  
         if self.world.collides(self.bird.get_rect(), ignore_logs=self.bird.is_ghost()):
             settings.SOUNDS["explosion"].play()
             settings.SOUNDS["hurt"].play()
+
+            self.change_music("marios_way.ogg")
+            self.current_music = "marios_way"
+
             self.state_machine.change("count_down", difficulty=self.world.difficulty)
             return
 
         powerup = self.world.collides_powerup(self.bird.get_rect())
         if powerup is not None:
             self.world.remove_powerup(powerup)
+            settings.SOUNDS["powerup"].play()
+
             self.bird.activate_ghost(settings.POWERUP_DURATION)
-            settings.SOUNDS["score"].play()
+
+            if self.current_music != "powerup_music":
+                self.change_music("powerup_music.wav")
+                self.current_music = "powerup_music"
 
         if self.world.update_scored(self.bird.get_rect()):
             self.score += 1
             settings.SOUNDS["score"].play()
 
+    def change_music(self, filename: str) -> None:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load(settings.BASE_DIR / "assets" / "sounds" / filename)
+        pygame.mixer.music.play(loops=-1)
+    
+        
     def render(self, surface: pygame.Surface) -> None:
         self.world.render(surface)
         self.bird.render(surface)
